@@ -1,7 +1,10 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
-
+import logo from '../Assets/albumpickslogo.png';
 const inter = Inter({ subsets: ['latin'] })
+import Image from 'next/image';
+import { getServerSession } from 'next-auth/next';
+import Nav from './Components/Nav';
 
 export const metadata = {
   title: 'Create Next App',
@@ -9,9 +12,17 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+     
+      <body className={inter.className}>
+     
+        <Nav/>
+        {children}
+        
+        
+        </body>
     </html>
   )
 }
