@@ -10,8 +10,10 @@ import Image from 'next/image';
 
 const navigation = [
   { name: 'Home', href: '/' },
-  { name: 'My Shared Albums', href: '/playground' },
-  { name: 'Pricing And Subscription', href: '/playground' }
+  { name: 'My Shared Albums', href: '/MysharedAlbums' },
+  { name: 'Pricing And Subscription', href: '/w' }
+  , { name: 'How to Use', href: '/w' },
+  { name: 'Contact Us', href: '/d' }
 ];
 
 function classNames(...classes) {
@@ -22,7 +24,7 @@ export default function Navbar({ user }) {
   const pathname = usePathname();
 
   return (
-    <Disclosure as="nav" className="bg-white shadow-sm">
+    <Disclosure as="nav" className="bg-white shadow-sm sticky ">
       {({ open }) => (
         <>
           <div className="mx-auto  px-4 sm:px-6 lg:px-8">

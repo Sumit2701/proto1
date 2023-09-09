@@ -1,9 +1,9 @@
 import Image from 'next/image'
-import Hero from './Components/Hero'
+import HomePage from './Components/HomePage'
 export default function Home() {
   return (
  <div>
-  <Hero/>
+  <HomePage/>
  </div>
   )
 }
