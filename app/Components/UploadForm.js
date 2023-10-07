@@ -1,5 +1,4 @@
 import React from "react";
-import { getServerSession } from "next-auth/next";
 
 export default function UploadForm(props) {
   return (
