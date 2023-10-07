@@ -1,6 +1,7 @@
 import React from "react";
 import hero from "../../Assets/hero.png";
 import Image from "next/image";
+import Link from "next/link";
 export default function Hero() {
   
   return (
@@ -19,7 +20,7 @@ export default function Hero() {
         </p>
         <div className="my-4 flex flex-row sm:justify-start justify-between">
            <button  className="bg-blue-700 rounded text-white shadow px-2   py-2 text-[8px] sm:text-base w-auto" >
-            Share Photos
+        <Link href={"/CreateAlbum"}>  Share Photos</Link>  
             </button> 
             <button  className=" rounded border-2 border-blue-700 shadow  mx-auto px-1 py-1 text-[8px] sm:text-base " >
             New Here? Subscribe Now

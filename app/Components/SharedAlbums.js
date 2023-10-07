@@ -3,7 +3,7 @@ import AlbumCard from './AlbumCard'
 export default function SharedAlbums() {
   return (
     <div>
-        {al}
+        {}
   </div>
   )
 }
