@@ -15,7 +15,7 @@ export default function UploadForm(props) {
         <label className="text-sm">Description</label>
         <input
           type="type"
-          maxlength="50"
+          maxLength="50"
           className="py-2 px-3 block w-full border-gray-200 border rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 "
         />
       </div>
