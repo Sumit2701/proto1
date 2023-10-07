@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import logo from '../../Assets/hero.png'
 export default function Features() {

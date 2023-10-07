@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import AlbumCard from './AlbumCard'
 export default function SharedAlbums() {
