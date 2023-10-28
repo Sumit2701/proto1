@@ -1,15 +1,45 @@
 'use client'
 import React from "react";
-import { useState } from "react";
+import  { useState, useEffect } from 'react';
+import axios from "axios";
+
+
 export default function Upload() {
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  for (const file of selectedFiles) {
-    
-  }
+
+  const [selectedFile, setSelectedFile] = useState(null);
+
+
+  // const handleUpload = () => {
+  //   if (!selectedFile) {
+  //     alert("Please select a file first.");
+  //     return;
+  //   }
+
+  //   // Create a FormData object and append the selected file to it
+  //   const formData = new FormData();
+  //   formData.append("file", selectedFile);
+
+  //   // Make an axios POST request to your backend API
+  //   axios.post("http://localhost:5000/resize-images", formData)
+  //     .then((response) => {
+  //       // Handle the response from the backend as needed
+  //       console.log("File uploaded successfully!", response);
+  //     })
+  //     .catch((error) => {
+  //       // Handle any errors that occur during the upload
+  //       console.error("Error uploading file:", error);
+  //     });
+  // };
   const handleFileChange = (e) => {
-    const files = e.target.files;
-    setSelectedFiles(files);
+    setSelectedFile(e.target.files[0]);
+
+    // Call uploadFiles after setting selected files
+   
+   
   };
+ 
+
+  
   return (
     <div className="sm:w-2/5 mx-auto sm:my-auto my-2">
       <div className="max-w-xl">
@@ -38,11 +68,15 @@ export default function Upload() {
             type="file"
             name="file_upload"
             onChange={handleFileChange}
-            multiple
+          
             className="hidden"
           />
         </label>
+        <button className="bg-gray-200" onClick={handleUpload}> Upload</button>
+    
+      
       </div>
     </div>
   );
 }
+

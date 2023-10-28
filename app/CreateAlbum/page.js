@@ -1,7 +1,7 @@
 'use client'
 import React from "react";
-import Upload from "../Components/Upload";
-import UploadForm from "../Components/UploadForm";
+import Upload from "./Components/Upload";
+import UploadForm from "./Components/UploadForm";
 import { useState } from "react";
 export default function CreateAlbum() {
     const [formData, setformData] = useState({
