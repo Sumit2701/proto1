@@ -9,37 +9,73 @@ export default function Upload() {
   const [selectedFile, setSelectedFile] = useState(null);
 
 
-  // const handleUpload = () => {
-  //   if (!selectedFile) {
-  //     alert("Please select a file first.");
-  //     return;
-  //   }
-
-  //   // Create a FormData object and append the selected file to it
-  //   const formData = new FormData();
-  //   formData.append("file", selectedFile);
-
-  //   // Make an axios POST request to your backend API
-  //   axios.post("http://localhost:5000/resize-images", formData)
-  //     .then((response) => {
-  //       // Handle the response from the backend as needed
-  //       console.log("File uploaded successfully!", response);
-  //     })
-  //     .catch((error) => {
-  //       // Handle any errors that occur during the upload
-  //       console.error("Error uploading file:", error);
-  //     });
-  // };
-  const handleFileChange = (e) => {
+ 
+  
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    const content_type = file.type;
+    const key = `image/${file.name}`;
+  
     setSelectedFile(e.target.files[0]);
-
-    // Call uploadFiles after setting selected files
+    const res = await getSignedUrl({ key, content_type });
+  
+    // Function to upload the file to the obtained signed URL
+    const uploadToSignedUrl = async (signedUrl, file) => {
+      try {
+        const response = await fetch(signedUrl, {
+          method: 'PUT',
+          body: file,
+          headers: {
+            'Content-Type': file.type,
+          },
+        });
+  
+        if (response.ok) {
+          console.log('File uploaded successfully!');
+          // Additional logic after successful upload
+        } else {
+          console.error('Failed to upload file.');
+          // Additional error handling
+        }
+      } catch (error) {
+        console.error('Error occurred during file upload:', error);
+        // Additional error handling
+      }
+    };
    
-   
+   await uploadToSignedUrl(res.url.signedUrl, file);
   };
  
-
+  async function getSignedUrl({ key, content_type }) {
+    try { 
+      console.log(key)
+      const response = await fetch(`http://localhost:8080/s3Url/?key=${key}&content_type=${content_type}`, {
+        method: 'get',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+       
+      });
+      
+      if (!response.ok) {
+        throw new Error('Network response was not ok.');
+      }
+      console.log("Pathavli")
+      return await response.json();
+      
+      //console.log(data.url.signedUrl)
+      // Use the 'data' obtained from the response as needed
+      // For example: return data;
+    } catch (error) {
+      // Handle error, e.g., throw or log the error
+      console.error('Error:', error);
+      // throw error; // Uncomment this line if you want to propagate the error
+    }
   
+  
+   
+  }
+   
   return (
     <div className="sm:w-2/5 mx-auto sm:my-auto my-2">
       <div className="max-w-xl">
@@ -68,11 +104,11 @@ export default function Upload() {
             type="file"
             name="file_upload"
             onChange={handleFileChange}
-          
+            multiple
             className="hidden"
           />
         </label>
-        <button className="bg-gray-200" onClick={handleUpload}> Upload</button>
+        <button className="bg-gray-200" > Upload</button>
     
       
       </div>
