@@ -11,41 +11,84 @@ export default function Upload() {
 
  
   
+  // const handleFileChange = async (e) => {
+  //   const file = e.target.files[0];
+  //   const content_type = file.type;
+  //   const key = `image/${file.name}`;
+  
+  //   setSelectedFile(e.target.files[0]);
+  //   const res = await getSignedUrl({ key, content_type });
+  
+  //   // Function to upload the file to the obtained signed URL
+  //   const uploadToSignedUrl = async (signedUrl, file) => {
+  //     try {
+  //       const response = await fetch(signedUrl, {
+  //         method: 'PUT',
+  //         body: file,
+  //         headers: {
+  //           'Content-Type': file.type,
+  //         },
+  //       });
+  
+  //       if (response.ok) {
+  //         console.log('File uploaded successfully!');
+  //         // Additional logic after successful upload
+  //       } else {
+  //         console.error('Failed to upload file.');
+  //         // Additional error handling
+  //       }
+  //     } catch (error) {
+  //       console.error('Error occurred during file upload:', error);
+  //       // Additional error handling
+  //     }
+  //   };
+   
+  //  await uploadToSignedUrl(res.url.signedUrl, file);
+  // };
+ 
   const handleFileChange = async (e) => {
-    const file = e.target.files[0];
-    const content_type = file.type;
-    const key = `image/${file.name}`;
-  
-    setSelectedFile(e.target.files[0]);
-    const res = await getSignedUrl({ key, content_type });
-  
-    // Function to upload the file to the obtained signed URL
-    const uploadToSignedUrl = async (signedUrl, file) => {
+    const files = e.target.files;
+    
+    for (const file of files) {
+      const content_type = file.type;
+      const key = `test/${file.name}`;
+      
       try {
-        const response = await fetch(signedUrl, {
-          method: 'PUT',
-          body: file,
-          headers: {
-            'Content-Type': file.type,
-          },
-        });
+        const res = await getSignedUrl({ key, content_type });
   
-        if (response.ok) {
-          console.log('File uploaded successfully!');
-          // Additional logic after successful upload
-        } else {
-          console.error('Failed to upload file.');
-          // Additional error handling
-        }
+        // Function to upload the file to the obtained signed URL
+        const uploadToSignedUrl = async (signedUrl, file) => {
+          try {
+            const response = await fetch(signedUrl, {
+              method: 'PUT',
+              body: file,
+              headers: {
+                'Content-Type': file.type,
+              },
+            });
+  
+            if (response.ok) {
+              console.log(`${file.name} uploaded successfully!`);
+              // Additional logic after successful upload
+            } else {
+              console.error(`Failed to upload ${file.name}.`);
+              // Additional error handling
+            }
+          } catch (error) {
+            console.error(`Error occurred during ${file.name} upload:`, error);
+            // Additional error handling
+          }
+        };
+        
+        await uploadToSignedUrl(res.url.signedUrl, file);
       } catch (error) {
-        console.error('Error occurred during file upload:', error);
+        console.error('Error obtaining signed URL:', error);
         // Additional error handling
       }
-    };
-   
-   await uploadToSignedUrl(res.url.signedUrl, file);
+    }
   };
- 
+  
+
   async function getSignedUrl({ key, content_type }) {
     try { 
       console.log(key)
@@ -63,9 +106,7 @@ export default function Upload() {
       console.log("Pathavli")
       return await response.json();
       
-      //console.log(data.url.signedUrl)
-      // Use the 'data' obtained from the response as needed
-      // For example: return data;
+    
     } catch (error) {
       // Handle error, e.g., throw or log the error
       console.error('Error:', error);
