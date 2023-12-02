@@ -18,7 +18,7 @@ export default function Hero() {
           Quickly Share Albums with Clients to help them select the best Photos
           
         </p>
-        <div className="my-4 flex flex-row sm:justify-start justify-between">
+        <div className="my-4 flex flex-row sm:justify-start justify-start">
            <button  className="bg-blue-700 rounded text-white shadow px-2   py-2 text-[8px] sm:text-base w-auto" >
         <Link href={"/CreateAlbum"}>  Share Photos</Link>  
             </button> 
