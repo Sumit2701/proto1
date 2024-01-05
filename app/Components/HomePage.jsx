@@ -7,8 +7,10 @@ export default function HomePage() {
   return (
     <div>
         <Hero/>
+
         <Features/>
         <Footer/>
+
     </div>
   )
 }

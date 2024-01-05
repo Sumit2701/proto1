@@ -59,6 +59,7 @@ export default function Upload() {
   async function getSignedUrl({ key, content_type }) {
     try {
       const response = await fetch(`http://localhost:8080/s3Url/?key=${key}&content_type=${content_type}`, {
+        // const response=await fetch(`/CreateAlbum/api?key=${key}&content_type=${content_type}`,{
         method: 'GET',
         headers: {
           'Content-Type': 'application/json'
@@ -68,7 +69,7 @@ export default function Upload() {
       if (!response.ok) {
         throw new Error('Network response was not ok.');
       }
-
+     
       return await response.json();
     } catch (error) {
       console.error('Error:', error);
